@@ -64,15 +64,15 @@ function App() {
                     <div className="logo-triangle" />
                   </div>
                   <div className="logo-text">
-                    <strong>HPK RECYCLING</strong>
+                    <strong>NATIONWIDE WASTE &amp; RECYCLING</strong>
                     <span>RETHINKING THE FUTURE OF WASTE</span>
                   </div>
                 </div>
                 <div className="pdf-company-info">
-                  <strong>HPK Recycling Limited</strong>
+                  <strong>Nationwide Waste &amp; Recycling Limited</strong>
                   <span>28 Dunkirk Road, Southport PR8 4RQ</span>
-                  <span className="link">admin@hpk-recycling.co.uk</span>
-                  <span>Tel: 0800 677 1963</span>
+                  <span className="link">admin@nationwidewasteandrecycling.co.uk</span>
+                  <span>Tel: 0800 1123443</span>
                 </div>
               </div>
               <div className="pdf-license">
