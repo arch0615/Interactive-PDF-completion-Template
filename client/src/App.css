@@ -98,8 +98,9 @@ body {
 }
 .pdf-logo {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
 }
 
 /* Logo graphic — two perfect right triangles with overlapping bases */
@@ -143,6 +144,7 @@ body {
 .logo-text {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 2px;
 }
 .logo-text strong {
