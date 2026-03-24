@@ -192,34 +192,28 @@ export default function PDFPage1({ formData, updateField, updateNested, updateSe
       {/* ===== SERVICE ===== */}
       <div className="pdf-section-header">Service</div>
       <div className="pdf-section">
-        <div className="pdf-row">
-          <label className="pdf-field flex-1">
-            <span className="pdf-label">Collection site address</span>
-            <input
-              type="text"
-              value={formData.collectionSiteAddress1}
-              onChange={(e) => updateField('collectionSiteAddress1', e.target.value)}
-            />
-          </label>
-        </div>
-
-        <div className="pdf-row">
-          <label className="pdf-field flex-3">
-            <input
-              type="text"
-              value={formData.collectionSiteAddress2}
-              onChange={(e) => updateField('collectionSiteAddress2', e.target.value)}
-            />
-          </label>
-          <label className="pdf-field flex-1">
-            <span className="pdf-label">Postcode</span>
-            <input
-              type="text"
-              value={formData.collectionSitePostcode}
-              onChange={(e) => updateField('collectionSitePostcode', e.target.value)}
-            />
-          </label>
-        </div>
+        <LinkedInputs
+          values={[formData.collectionSiteAddress1, formData.collectionSiteAddress2]}
+          onChange={[
+            (v) => updateField('collectionSiteAddress1', v),
+            (v) => updateField('collectionSiteAddress2', v),
+          ]}
+          label="Collection site address"
+          rows={[
+            {},
+            { halfWidth: true,
+              leftExtra: (
+                <>
+                  <span className="pdf-label">Postcode</span>
+                  <input type="text"
+                    value={formData.collectionSitePostcode}
+                    onChange={(e) => updateField('collectionSitePostcode', e.target.value)}
+                  />
+                </>
+              ),
+            },
+          ]}
+        />
 
         <div className="pdf-row">
           <label className="pdf-field flex-1">
@@ -305,17 +299,23 @@ export default function PDFPage1({ formData, updateField, updateNested, updateSe
       {/* ===== SPECIAL CONDITIONS ===== */}
       <div className="pdf-section-header">Special Conditions</div>
       <div className="pdf-section">
-        {[1, 2, 3, 4, 5].map((n) => (
-          <div className="pdf-row" key={n}>
-            <label className="pdf-field flex-1">
-              <input
-                type="text"
-                value={formData[`specialConditions${n}`]}
-                onChange={(e) => updateField(`specialConditions${n}`, e.target.value)}
-              />
-            </label>
-          </div>
-        ))}
+        <LinkedInputs
+          values={[
+            formData.specialConditions1,
+            formData.specialConditions2,
+            formData.specialConditions3,
+            formData.specialConditions4,
+            formData.specialConditions5,
+          ]}
+          onChange={[
+            (v) => updateField('specialConditions1', v),
+            (v) => updateField('specialConditions2', v),
+            (v) => updateField('specialConditions3', v),
+            (v) => updateField('specialConditions4', v),
+            (v) => updateField('specialConditions5', v),
+          ]}
+          rows={[{}, {}, {}, {}, {}]}
+        />
       </div>
     </>
   );
