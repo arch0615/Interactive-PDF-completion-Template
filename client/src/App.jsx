@@ -60,11 +60,12 @@ function App() {
               {/* PDF Header */}
               <div className="pdf-header">
                 <div className="pdf-logo">
-                  <div className="logo-shape">
-                    <div className="logo-triangle" />
+                  <div className="logo-graphic">
+                    <div className="logo-tri-striped" />
+                    <div className="logo-tri-solid" />
                   </div>
                   <div className="logo-text">
-                    <strong>NATIONWIDE WASTE &amp; RECYCLING</strong>
+                    <strong>HPK RECYCLING</strong>
                     <span>RETHINKING THE FUTURE OF WASTE</span>
                   </div>
                 </div>
