@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(python3 -c \":*)",
+      "Bash(pip3 list:*)",
+      "Bash(pdfinfo '/home/ubuntu/Documents/Demo/Interactive PDF Completion Tool/3a3de12b-352c-43a1-9527-2007b2948259.pdf')",
+      "Bash(pdftotext '/home/ubuntu/Documents/Demo/Interactive PDF Completion Tool/3a3de12b-352c-43a1-9527-2007b2948259.pdf' -)",
+      "Bash(npx create-vite@latest client --template react)",
+      "Bash(npm install:*)",
+      "Bash(npx vite:*)",
+      "Bash(timeout 3 node index.js)",
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(curl -s http://localhost:3001/api/pdf/template-info)",
+      "Bash(curl -s http://localhost:5174)",
+      "Bash(curl -s http://localhost:5174/src/main.jsx)",
+      "Bash(node -e \"console.log\\(require\\(''./node_modules/pdfjs-dist/package.json''\\).version\\)\")",
+      "Bash(lsof -ti:3001)",
+      "Bash(xargs kill:*)",
+      "Bash(lsof -ti:5174)"
+    ]
+  }
+}
