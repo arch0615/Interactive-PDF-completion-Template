@@ -170,14 +170,8 @@ export default function LinkedInputs({ values, onChange, label, rows }) {
     }
   }, [values, onChange, allSelected, selectAll, clearAllSelected]);
 
-  // Click on the wrapper → focus the first input (or the one closest to click)
-  const handleWrapperClick = useCallback((e) => {
-    // Don't interfere if user clicked directly on any input
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
-    // Don't interfere if click is inside leftExtra or rightContent areas
-    if (e.target.closest('.linked-right') || e.target.closest('.linked-extra')) return;
-
-    // Find the last input with content, place cursor at end
+  // Focus the correct input: end of last non-empty, or first if all empty
+  const focusCorrectInput = useCallback(() => {
     for (let i = values.length - 1; i >= 0; i--) {
       if (values[i].length > 0) {
         const input = inputRefs.current[i];
@@ -188,13 +182,30 @@ export default function LinkedInputs({ values, onChange, label, rows }) {
         return;
       }
     }
-    // All empty → focus first
     const first = inputRefs.current[0];
     if (first) {
       first.focus();
       first.setSelectionRange(0, 0);
     }
   }, [values]);
+
+  // Click on the wrapper → redirect focus to correct input
+  const handleWrapperClick = useCallback((e) => {
+    // Don't interfere if click is inside leftExtra or rightContent areas
+    if (e.target.closest('.linked-right') || e.target.closest('.linked-extra')) return;
+
+    // Check if user clicked on a linked input that already has content
+    if (e.target.classList.contains('linked-input')) {
+      const clickedIndex = inputRefs.current.indexOf(e.target);
+      if (clickedIndex >= 0 && values[clickedIndex].length > 0) {
+        // Allow normal click on inputs that have content
+        return;
+      }
+    }
+
+    e.preventDefault();
+    focusCorrectInput();
+  }, [values, focusCorrectInput]);
 
   const handleFocus = useCallback(() => setIsFocused(true), []);
   const handleBlur = useCallback((e) => {
