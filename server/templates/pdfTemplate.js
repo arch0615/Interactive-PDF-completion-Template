@@ -22,6 +22,12 @@ export function generateHtml(data) {
     ...data,
   };
 
+  // --- Placeholder redistribution — actual pixel-based splitting done after render ---
+  const invoiceAddr = [d.invoiceAddress1, d.invoiceAddress2, d.invoiceAddress3];
+  const proprietorAddr = [d.proprietorHomeAddress1, d.proprietorHomeAddress2];
+  const collectionAddr = [d.collectionSiteAddress1, d.collectionSiteAddress2];
+  const specialCond = [d.specialConditions1, d.specialConditions2, d.specialConditions3, d.specialConditions4, d.specialConditions5];
+
   const checked = (val) => val ? '&#10003;' : '';
   const bt = (type) => d.businessType?.[type] ? '&#10003;' : '';
   const pm = (type) => d.paymentMethod === type ? '&#10003;' : '';
@@ -311,16 +317,16 @@ export function generateHtml(data) {
         <div class="spacer"></div>
       </div>
       <div class="row">
-        <div class="field flex-3"><span class="field-label">Invoice address</span><span class="field-value">${d.invoiceAddress1}</span></div>
+        <div class="field flex-3"><span class="field-label">Invoice address</span><span class="field-value" data-lg="invAddr" data-li="0">${invoiceAddr[0]}</span></div>
         <div class="field-row flex-2"><span class="field-label">Limited liability partnership</span><span class="cb">${bt('limitedLiabilityPartnership')}</span></div>
       </div>
       <div class="row">
-        <div class="field flex-3"><span class="field-value">${d.invoiceAddress2}</span></div>
+        <div class="field flex-3"><span class="field-value" data-lg="invAddr" data-li="1">${invoiceAddr[1]}</span></div>
         <div class="field-row flex-2"><span class="field-label">Sole trader</span><span class="cb">${bt('soleTrader')}</span></div>
       </div>
       <div class="row">
         <div style="flex:3;display:flex;gap:12px;min-width:0">
-          <div class="field flex-1"><span class="field-value">${d.invoiceAddress3}</span></div>
+          <div class="field flex-1"><span class="field-value" data-lg="invAddr" data-li="2">${invoiceAddr[2]}</span></div>
           <div class="field flex-1"><span class="field-label">Postcode</span><span class="field-value">${d.invoicePostcode}</span></div>
         </div>
         <div class="field-row flex-2"><span class="field-label">Partnership</span><span class="cb">${bt('partnership')}</span></div>
@@ -334,10 +340,10 @@ export function generateHtml(data) {
         <div class="field flex-1"><span class="field-label">Mobile</span><span class="field-value">${d.invoiceMobile}</span></div>
       </div>
       <div class="row">
-        <div class="field flex-1"><span class="field-label">Proprietor/partner home address</span><span class="field-value">${d.proprietorHomeAddress1}</span></div>
+        <div class="field flex-1"><span class="field-label">Proprietor/partner home address</span><span class="field-value" data-lg="propAddr" data-li="0">${proprietorAddr[0]}</span></div>
       </div>
       <div class="row">
-        <div class="field flex-3"><span class="field-value">${d.proprietorHomeAddress2}</span></div>
+        <div class="field flex-3"><span class="field-value" data-lg="propAddr" data-li="1">${proprietorAddr[1]}</span></div>
         <div class="field flex-1"><span class="field-label">Postcode</span><span class="field-value">${d.proprietorHomePostcode}</span></div>
       </div>
     </div>
@@ -348,10 +354,10 @@ export function generateHtml(data) {
     <div class="section-header">Service</div>
     <div class="section">
       <div class="row">
-        <div class="field flex-1"><span class="field-label">Collection site address</span><span class="field-value">${d.collectionSiteAddress1}</span></div>
+        <div class="field flex-1"><span class="field-label">Collection site address</span><span class="field-value" data-lg="collAddr" data-li="0">${collectionAddr[0]}</span></div>
       </div>
       <div class="row">
-        <div class="field flex-3"><span class="field-value">${d.collectionSiteAddress2}</span></div>
+        <div class="field flex-3"><span class="field-value" data-lg="collAddr" data-li="1">${collectionAddr[1]}</span></div>
         <div class="field flex-1"><span class="field-label">Postcode</span><span class="field-value">${d.collectionSitePostcode}</span></div>
       </div>
       <div class="row">
@@ -387,11 +393,11 @@ export function generateHtml(data) {
   <div class="sec-special">
     <div class="section-header">Special Conditions</div>
     <div class="section">
-      <div class="row"><div class="field flex-1"><span class="field-value">${d.specialConditions1}</span></div></div>
-      <div class="row"><div class="field flex-1"><span class="field-value">${d.specialConditions2}</span></div></div>
-      <div class="row"><div class="field flex-1"><span class="field-value">${d.specialConditions3}</span></div></div>
-      <div class="row"><div class="field flex-1"><span class="field-value">${d.specialConditions4}</span></div></div>
-      <div class="row"><div class="field flex-1"><span class="field-value">${d.specialConditions5}</span></div></div>
+      <div class="row"><div class="field flex-1"><span class="field-value" data-lg="specCond" data-li="0">${specialCond[0]}</span></div></div>
+      <div class="row"><div class="field flex-1"><span class="field-value" data-lg="specCond" data-li="1">${specialCond[1]}</span></div></div>
+      <div class="row"><div class="field flex-1"><span class="field-value" data-lg="specCond" data-li="2">${specialCond[2]}</span></div></div>
+      <div class="row"><div class="field flex-1"><span class="field-value" data-lg="specCond" data-li="3">${specialCond[3]}</span></div></div>
+      <div class="row"><div class="field flex-1"><span class="field-value" data-lg="specCond" data-li="4">${specialCond[4]}</span></div></div>
     </div>
   </div>
 </div>

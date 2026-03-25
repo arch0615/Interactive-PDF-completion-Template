@@ -9,15 +9,41 @@ import { useRef, useCallback, useState } from 'react';
  * - Delete/Backspace with all selected clears everything
  */
 
-function measureMaxChars(input) {
-  if (!input) return 40;
+// Measure text width in pixels using the input's actual font
+function measureTextWidth(input, text) {
+  if (!input || !text) return 0;
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   const style = getComputedStyle(input);
   ctx.font = `${style.fontSize} ${style.fontFamily}`;
-  const avgCharWidth = ctx.measureText('abcdefghijklmnopqrstuvwxyz').width / 26;
-  const available = input.offsetWidth - 8;
-  return Math.floor(available / avgCharWidth);
+  return ctx.measureText(text).width;
+}
+
+// Get available width inside input (minus padding)
+function getAvailableWidth(input) {
+  if (!input) return 200;
+  const style = getComputedStyle(input);
+  return input.offsetWidth - parseFloat(style.paddingLeft || 0) - parseFloat(style.paddingRight || 0);
+}
+
+// Find how many characters fit in the input based on actual pixel width
+function findFitLength(input, text) {
+  if (!input || !text) return text ? text.length : 0;
+  const available = getAvailableWidth(input);
+  const fullWidth = measureTextWidth(input, text);
+  if (fullWidth <= available) return text.length;
+
+  // Binary search for the max length that fits
+  let lo = 0, hi = text.length;
+  while (lo < hi) {
+    const mid = Math.ceil((lo + hi) / 2);
+    if (measureTextWidth(input, text.slice(0, mid)) <= available) {
+      lo = mid;
+    } else {
+      hi = mid - 1;
+    }
+  }
+  return lo;
 }
 
 export default function LinkedInputs({ values, onChange, label, rows }) {
@@ -63,11 +89,12 @@ export default function LinkedInputs({ values, onChange, label, rows }) {
       return;
     }
 
-    const maxChars = measureMaxChars(inputRefs.current[index]);
+    const input = inputRefs.current[index];
+    const fitLen = findFitLength(input, newValue);
 
-    if (newValue.length > maxChars && index < values.length - 1) {
-      const keep = newValue.slice(0, maxChars);
-      const overflow = newValue.slice(maxChars);
+    if (fitLen < newValue.length && index < values.length - 1) {
+      const keep = newValue.slice(0, fitLen);
+      const overflow = newValue.slice(fitLen);
       onChange[index](keep);
       const nextVal = values[index + 1];
       onChange[index + 1](overflow + nextVal);
@@ -117,16 +144,19 @@ export default function LinkedInputs({ values, onChange, label, rows }) {
       e.preventDefault();
       const prevVal = values[index - 1];
       const curVal = values[index];
-      const maxChars = measureMaxChars(inputRefs.current[index - 1]);
-      const space = maxChars - prevVal.length;
+      const prevInput = inputRefs.current[index - 1];
 
-      if (space > 0 && curVal.length > 0) {
-        const moveBack = curVal.slice(0, space);
-        const remain = curVal.slice(space);
+      // Find how many chars from curVal can fit in prev input
+      const combined = prevVal + curVal;
+      const fitLen = findFitLength(prevInput, combined);
+      const canFitMore = fitLen > prevVal.length;
+
+      if (canFitMore && curVal.length > 0) {
+        const moveBack = curVal.slice(0, fitLen - prevVal.length);
+        const remain = curVal.slice(fitLen - prevVal.length);
         onChange[index - 1](prevVal + moveBack);
         onChange[index](remain);
         setTimeout(() => {
-          const prevInput = inputRefs.current[index - 1];
           if (prevInput) {
             prevInput.focus();
             prevInput.setSelectionRange(prevVal.length + moveBack.length, prevVal.length + moveBack.length);
