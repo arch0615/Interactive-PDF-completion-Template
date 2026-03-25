@@ -94,15 +94,36 @@ export default function LinkedInputs({ values, onChange, label, rows }) {
 
     if (fitLen < newValue.length && index < values.length - 1) {
       const keep = newValue.slice(0, fitLen);
-      const overflow = newValue.slice(fitLen);
+      let overflow = newValue.slice(fitLen);
+
       onChange[index](keep);
-      const nextVal = values[index + 1];
-      onChange[index + 1](overflow + nextVal);
+
+      // Cascade overflow through all subsequent fields
+      const cursorField = index + 1;
+      const cursorPos = overflow.length;
+
+      for (let i = index + 1; i < values.length; i++) {
+        const combined = overflow + values[i];
+        const nextInput = inputRefs.current[i];
+        const nextFitLen = findFitLength(nextInput, combined);
+
+        if (nextFitLen >= combined.length || i === values.length - 1) {
+          // Everything fits in this field (or it's the last field)
+          onChange[i](combined);
+          overflow = '';
+          break;
+        } else {
+          // This field also overflows — keep what fits, continue cascading
+          onChange[i](combined.slice(0, nextFitLen));
+          overflow = combined.slice(nextFitLen);
+        }
+      }
+
       setTimeout(() => {
-        const nextInput = inputRefs.current[index + 1];
+        const nextInput = inputRefs.current[cursorField];
         if (nextInput) {
           nextInput.focus();
-          nextInput.setSelectionRange(overflow.length, overflow.length);
+          nextInput.setSelectionRange(cursorPos, cursorPos);
         }
       }, 0);
     } else {
