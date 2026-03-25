@@ -33,6 +33,48 @@ function App() {
     submitForm();
   };
 
+  const toolbar = (
+    <div className="form-toolbar">
+      <div className="page-nav">
+        <button
+          type="button"
+          className={`page-nav-btn ${currentPage === 1 ? 'active' : ''}`}
+          onClick={() => setCurrentPage(1)}
+        >
+          Page 1
+        </button>
+        <button
+          type="button"
+          className={`page-nav-btn ${currentPage === 2 ? 'active' : ''}`}
+          onClick={() => setCurrentPage(2)}
+        >
+          Page 2
+        </button>
+      </div>
+      <div className="form-actions">
+        <button
+          type="button"
+          className="btn-preview"
+          disabled={isPreviewing}
+          onClick={previewForm}
+        >
+          {isPreviewing ? 'Loading...' : 'Preview PDF'}
+        </button>
+        <button
+          type="button"
+          className="btn-primary"
+          disabled={isSubmitting}
+          onClick={handleSubmit}
+        >
+          {isSubmitting ? 'Generating...' : 'Generate & Download'}
+        </button>
+        <button type="button" className="btn-secondary" onClick={resetForm}>
+          Reset
+        </button>
+      </div>
+    </div>
+  );
+
   return (
     <div className="app">
       <header className="app-header">
@@ -42,23 +84,7 @@ function App() {
 
       <div className="app-layout">
         <div className="form-panel">
-          {/* Page navigation */}
-          <div className="page-nav">
-            <button
-              type="button"
-              className={`page-nav-btn ${currentPage === 1 ? 'active' : ''}`}
-              onClick={() => setCurrentPage(1)}
-            >
-              Page 1
-            </button>
-            <button
-              type="button"
-              className={`page-nav-btn ${currentPage === 2 ? 'active' : ''}`}
-              onClick={() => setCurrentPage(2)}
-            >
-              Page 2
-            </button>
-          </div>
+          {toolbar}
 
           <form onSubmit={handleSubmit}>
             <div className="pdf-page">
@@ -101,43 +127,7 @@ function App() {
               )}
             </div>
 
-            <div className="form-actions">
-              {currentPage === 1 ? (
-                <button
-                  type="button"
-                  className="btn-nav"
-                  onClick={() => setCurrentPage(2)}
-                >
-                  Next Page &rarr;
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  className="btn-nav"
-                  onClick={() => setCurrentPage(1)}
-                >
-                  &larr; Previous Page
-                </button>
-              )}
-              <button
-                type="button"
-                className="btn-preview"
-                disabled={isPreviewing}
-                onClick={previewForm}
-              >
-                {isPreviewing ? 'Loading...' : 'Preview PDF'}
-              </button>
-              <button
-                type="submit"
-                className="btn-primary"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Generating...' : 'Generate & Download'}
-              </button>
-              <button type="button" className="btn-secondary" onClick={resetForm}>
-                Reset
-              </button>
-            </div>
+            {toolbar}
 
             {error && <div className="error-message">{error}</div>}
             {downloadUrl && (

@@ -171,7 +171,16 @@ export function useFormData() {
     try {
       const res = await generatePdf(formData);
       if (res.data.success) {
-        setDownloadUrl(getDownloadUrl(res.data.filename));
+        const url = getDownloadUrl(res.data.filename);
+        setDownloadUrl(url);
+
+        // Auto-trigger download
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = res.data.filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       }
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to generate PDF');
