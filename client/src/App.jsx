@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import PDFPage1 from './components/PDFPage1';
 import PDFPage2 from './components/PDFPage2';
@@ -22,6 +22,11 @@ function App() {
     submitForm,
     resetForm,
   } = useFormData();
+
+  // Auto-generate preview on page load
+  useEffect(() => {
+    previewForm();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -147,7 +152,7 @@ function App() {
         </div>
 
         <div className="preview-panel">
-          <h2>{previewUrl ? 'Filled PDF Preview' : 'PDF Template Preview'}</h2>
+          <h2>PDF Preview</h2>
           {isPreviewing && (
             <div className="preview-loading">
               <div className="spinner" />

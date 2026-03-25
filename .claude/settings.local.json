@@ -18,7 +18,9 @@
       "Bash(lsof -ti:3001)",
       "Bash(xargs kill:*)",
       "Bash(lsof -ti:5174)",
-      "Bash(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)"
+      "Bash(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)",
+      "Bash(node -e \":*)",
+      "Read(//tmp/**)"
     ]
   }
 }

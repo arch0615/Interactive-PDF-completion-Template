@@ -6,6 +6,7 @@ const __dirname = dirname(__filename);
 
 // PDF page size: 594.96 x 841.92 points (A4)
 // Coordinate origin: bottom-left
+// Coordinates calibrated from grid overlay
 
 export const config = {
   templatePath: join(__dirname, '..', '3a3de12b-352c-43a1-9527-2007b2948259.pdf'),
@@ -14,134 +15,133 @@ export const config = {
   fields: {
     // ===================== PAGE 1 =====================
 
-    // --- Accounts ---
-    companyName:            { page: 0, x: 145, y: 693, size: 9 },
+    // --- Accounts (section header ~y:745) ---
+    companyName:            { page: 0, x: 155, y: 718, size: 9 },
     businessType: {
-      limitedCompany:                { page: 0, x: 530, y: 693 },
-      limitedLiabilityPartnership:   { page: 0, x: 530, y: 641 },
-      soleTrader:                    { page: 0, x: 530, y: 619 },
-      partnership:                   { page: 0, x: 530, y: 597 },
+      limitedCompany:                { page: 0, x: 555, y: 718 },
+      limitedLiabilityPartnership:   { page: 0, x: 555, y: 648 },
+      soleTrader:                    { page: 0, x: 555, y: 625 },
+      partnership:                   { page: 0, x: 555, y: 602 },
     },
-    tradingAs:              { page: 0, x: 115, y: 667, size: 9 },
-    regNumber:              { page: 0, x: 460, y: 667, size: 9 },
-    proprietorPartnerName:  { page: 0, x: 235, y: 641, size: 9 },
-    invoiceAddress1:        { page: 0, x: 135, y: 619, size: 9 },
-    invoiceAddress2:        { page: 0, x: 50,  y: 597, size: 9 },
-    invoiceAddress3:        { page: 0, x: 50,  y: 575, size: 9 },
-    invoicePostcode:        { page: 0, x: 260, y: 575, size: 9 },
-    invoiceContact:         { page: 0, x: 130, y: 549, size: 9 },
-    invoiceTel:             { page: 0, x: 400, y: 549, size: 9 },
-    invoiceEmail:           { page: 0, x: 90,  y: 527, size: 9 },
-    invoiceMobile:          { page: 0, x: 400, y: 527, size: 9 },
-    proprietorHomeAddress1: { page: 0, x: 220, y: 501, size: 9 },
-    proprietorHomeAddress2: { page: 0, x: 50,  y: 479, size: 9 },
-    proprietorHomePostcode: { page: 0, x: 430, y: 479, size: 9 },
+    tradingAs:              { page: 0, x: 120, y: 695, size: 9 },
+    regNumber:              { page: 0, x: 500, y: 695, size: 9 },
+    proprietorPartnerName:  { page: 0, x: 255, y: 672, size: 9 },
+    invoiceAddress1:        { page: 0, x: 145, y: 648, size: 9 },
+    invoiceAddress2:        { page: 0, x: 60,  y: 625, size: 9 },
+    invoiceAddress3:        { page: 0, x: 60,  y: 602, size: 9 },
+    invoicePostcode:        { page: 0, x: 280, y: 602, size: 9 },
+    invoiceContact:         { page: 0, x: 140, y: 578, size: 9 },
+    invoiceTel:             { page: 0, x: 365, y: 578, size: 9 },
+    invoiceEmail:           { page: 0, x: 100, y: 555, size: 9 },
+    invoiceMobile:          { page: 0, x: 395, y: 555, size: 9 },
+    proprietorHomeAddress1: { page: 0, x: 240, y: 532, size: 9 },
+    proprietorHomeAddress2: { page: 0, x: 60,  y: 510, size: 9 },
+    proprietorHomePostcode: { page: 0, x: 470, y: 510, size: 9 },
 
-    // --- Service ---
-    collectionSiteAddress1: { page: 0, x: 170, y: 437, size: 9 },
-    collectionSiteAddress2: { page: 0, x: 50,  y: 415, size: 9 },
-    collectionSitePostcode: { page: 0, x: 430, y: 415, size: 9 },
-    serviceContactName:     { page: 0, x: 135, y: 393, size: 9 },
-    serviceTel:             { page: 0, x: 400, y: 393, size: 9 },
-    serviceEmail:           { page: 0, x: 90,  y: 371, size: 9 },
-    serviceMobile:          { page: 0, x: 400, y: 371, size: 9 },
+    // --- Service (section header ~y:490) ---
+    collectionSiteAddress1: { page: 0, x: 185, y: 468, size: 9 },
+    collectionSiteAddress2: { page: 0, x: 60,  y: 448, size: 9 },
+    collectionSitePostcode: { page: 0, x: 470, y: 448, size: 9 },
+    serviceContactName:     { page: 0, x: 145, y: 425, size: 9 },
+    serviceTel:             { page: 0, x: 365, y: 425, size: 9 },
+    serviceEmail:           { page: 0, x: 100, y: 402, size: 9 },
+    serviceMobile:          { page: 0, x: 395, y: 402, size: 9 },
 
-    // --- Service Schedule ---
-    orderNumber:            { page: 0, x: 145, y: 335, size: 9 },
+    // --- Service Schedule (section header ~y:385) ---
+    orderNumber:            { page: 0, x: 155, y: 362, size: 9 },
 
-    // Service schedule table rows - each row has 10 columns
-    // Table starts around y: 285, rows spaced ~22pt apart
-    serviceTableStartY: 275,
-    serviceTableRowHeight: 22,
+    // Service schedule table — header row ~y:330, data rows below
+    serviceTableStartY: 298,
+    serviceTableRowHeight: 20,
     serviceTableColumns: {
-      type:           { x: 50 },
-      size:           { x: 120 },
-      qty:            { x: 175 },
-      wasteType:      { x: 210 },
-      collectionFreq: { x: 295 },
-      delDate:        { x: 370 },
-      emptyCharge:    { x: 430 },
-      rentalPerBin:   { x: 495 },
-      dutyCare:       { x: 555 },
-      delColFee:      { x: 615 },
+      type:           { x: 68 },
+      size:           { x: 140 },
+      qty:            { x: 205 },
+      wasteType:      { x: 255 },
+      collectionFreq: { x: 350 },
+      delDate:        { x: 420 },
+      emptyCharge:    { x: 475 },
+      rentalPerBin:   { x: 540 },
+      dutyCare:       { x: 600 },
+      delColFee:      { x: 660 },
     },
     serviceTableSize: 7,
 
-    // --- Special Conditions ---
+    // --- Special Conditions (section header ~y:170) ---
     specialConditions: {
-      startY: 133,
-      lineHeight: 20,
-      x: 50,
+      startY: 150,
+      lineHeight: 22,
+      x: 60,
       size: 9,
       page: 0,
     },
 
     // ===================== PAGE 2 =====================
 
-    // --- Invoicing & Payment (top of page 2) ---
-    electronicInvoicing:      { page: 1, x: 290, y: 710 },
-    electronicInvoicingEmail: { page: 1, x: 135, y: 690, size: 9 },
-    initialServiceTermWeeks:  { page: 1, x: 415, y: 710, size: 9 },
+    // --- Invoicing & Payment (bordered box ~y:710-740) ---
+    electronicInvoicing:      { page: 1, x: 310, y: 740 },
+    electronicInvoicingEmail: { page: 1, x: 140, y: 712, size: 9 },
+    initialServiceTermWeeks:  { page: 1, x: 440, y: 712, size: 9 },
     paymentMethod: {
-      directDebit:    { page: 1, x: 525, y: 718 },
-      standardCredit: { page: 1, x: 525, y: 700 },
-      inAdvance:      { page: 1, x: 525, y: 682 },
+      directDebit:    { page: 1, x: 540, y: 740 },
+      standardCredit: { page: 1, x: 540, y: 725 },
+      inAdvance:      { page: 1, x: 540, y: 710 },
     },
-    inAdvanceWeeks: { page: 1, x: 580, y: 682, size: 8 },
+    inAdvanceWeeks: { page: 1, x: 610, y: 710, size: 8 },
 
-    // --- Waste Schedule ---
-    producer:         { page: 1, x: 105, y: 631, size: 9 },
-    wasteProcess:     { page: 1, x: 140, y: 609, size: 9 },
-    transferNoteFrom: { page: 1, x: 430, y: 609, size: 9 },
-    transferNoteTo:   { page: 1, x: 520, y: 609, size: 9 },
+    // --- Waste Schedule (section header ~y:650) ---
+    producer:         { page: 1, x: 115, y: 628, size: 9 },
+    wasteProcess:     { page: 1, x: 155, y: 605, size: 9 },
+    transferNoteFrom: { page: 1, x: 440, y: 605, size: 9 },
+    transferNoteTo:   { page: 1, x: 540, y: 605, size: 9 },
     wasteTypes: {
-      paperCardboard:     { page: 1, x: 66,  y: 582 },
-      glass:              { page: 1, x: 195, y: 582 },
-      plastics:           { page: 1, x: 350, y: 582 },
-      metals:             { page: 1, x: 490, y: 582 },
-      wood:               { page: 1, x: 66,  y: 555 },
-      cateringWaste:      { page: 1, x: 195, y: 555 },
-      mixedMunicipalWaste:{ page: 1, x: 350, y: 555 },
+      paperCardboard:     { page: 1, x: 68,  y: 582 },
+      glass:              { page: 1, x: 210, y: 582 },
+      plastics:           { page: 1, x: 370, y: 582 },
+      metals:             { page: 1, x: 510, y: 582 },
+      wood:               { page: 1, x: 68,  y: 548 },
+      cateringWaste:      { page: 1, x: 210, y: 548 },
+      mixedMunicipalWaste:{ page: 1, x: 370, y: 548 },
     },
 
-    // --- Pre-treatment Declaration ---
+    // --- Pre-treatment Declaration (section header ~y:520) ---
     segregateWaste: {
-      yes: { page: 1, x: 285, y: 498 },
-      no:  { page: 1, x: 480, y: 498 },
+      yes: { page: 1, x: 300, y: 488 },
+      no:  { page: 1, x: 510, y: 488 },
     },
     recoveredItems: {
-      paper:     { page: 1, x: 66,  y: 467 },
-      glass:     { page: 1, x: 150, y: 467 },
-      plastic:   { page: 1, x: 245, y: 467 },
-      metals:    { page: 1, x: 340, y: 467 },
-      wood:      { page: 1, x: 66,  y: 445 },
-      food:      { page: 1, x: 150, y: 445 },
-      greenwaste:{ page: 1, x: 245, y: 445 },
-      weee:      { page: 1, x: 340, y: 445 },
+      paper:     { page: 1, x: 68,  y: 435 },
+      glass:     { page: 1, x: 175, y: 435 },
+      plastic:   { page: 1, x: 280, y: 435 },
+      metals:    { page: 1, x: 390, y: 435 },
+      wood:      { page: 1, x: 68,  y: 412 },
+      food:      { page: 1, x: 175, y: 412 },
+      greenwaste:{ page: 1, x: 280, y: 412 },
+      weee:      { page: 1, x: 390, y: 412 },
     },
-    recoveredOther1: { page: 1, x: 440, y: 467, size: 8 },
-    recoveredOther2: { page: 1, x: 440, y: 445, size: 8 },
+    recoveredOther1: { page: 1, x: 490, y: 435, size: 8 },
+    recoveredOther2: { page: 1, x: 490, y: 412, size: 8 },
 
-    // --- Health & Safety ---
+    // --- Health & Safety (section header ~y:350) ---
     healthSafety: {
-      clearAccess:                   { page: 1, yesX: 490, noX: 540, y: 370 },
-      wellLit:                       { page: 1, yesX: 490, noX: 540, y: 352 },
-      reverseInOut:                  { page: 1, yesX: 490, noX: 540, y: 334 },
-      overheadCablesNarrowGateways:  { page: 1, yesX: 490, noX: 540, y: 316 },
-      gravelCobbles:                 { page: 1, yesX: 490, noX: 540, y: 298 },
-      vehicleInView:                 { page: 1, yesX: 490, noX: 540, y: 280 },
-      excessWalking:                 { page: 1, yesX: 490, noX: 540, y: 262 },
-      publicStaffAnimals:            { page: 1, yesX: 490, noX: 540, y: 244 },
+      clearAccess:                   { page: 1, yesX: 510, noX: 565, y: 300 },
+      wellLit:                       { page: 1, yesX: 510, noX: 565, y: 282 },
+      reverseInOut:                  { page: 1, yesX: 510, noX: 565, y: 265 },
+      overheadCablesNarrowGateways:  { page: 1, yesX: 510, noX: 565, y: 248 },
+      gravelCobbles:                 { page: 1, yesX: 510, noX: 565, y: 232 },
+      vehicleInView:                 { page: 1, yesX: 510, noX: 565, y: 215 },
+      excessWalking:                 { page: 1, yesX: 510, noX: 565, y: 198 },
+      publicStaffAnimals:            { page: 1, yesX: 510, noX: 565, y: 182 },
     },
 
-    // --- Authorisation ---
-    supplierSignature: { page: 1, x: 170, y: 170, width: 150, height: 35 },
-    customerSignature: { page: 1, x: 430, y: 170, width: 150, height: 35 },
-    supplierPrintName: { page: 1, x: 135, y: 148, size: 9 },
-    customerPrintName: { page: 1, x: 400, y: 148, size: 9 },
-    supplierPosition:  { page: 1, x: 115, y: 126, size: 9 },
-    customerPosition:  { page: 1, x: 380, y: 126, size: 9 },
-    supplierDate:      { page: 1, x: 95,  y: 104, size: 9 },
-    customerDate:      { page: 1, x: 370, y: 104, size: 9 },
+    // --- Authorisation (section header ~y:170) ---
+    supplierSignature: { page: 1, x: 185, y: 118, width: 130, height: 25 },
+    customerSignature: { page: 1, x: 440, y: 118, width: 130, height: 25 },
+    supplierPrintName: { page: 1, x: 140, y: 95, size: 9 },
+    customerPrintName: { page: 1, x: 415, y: 95, size: 9 },
+    supplierPosition:  { page: 1, x: 125, y: 72, size: 9 },
+    customerPosition:  { page: 1, x: 400, y: 72, size: 9 },
+    supplierDate:      { page: 1, x: 110, y: 48, size: 9 },
+    customerDate:      { page: 1, x: 380, y: 48, size: 9 },
   },
 };

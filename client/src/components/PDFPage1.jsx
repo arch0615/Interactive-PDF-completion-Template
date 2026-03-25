@@ -34,11 +34,8 @@ export default function PDFPage1({ formData, updateField, updateNested, updateSe
             <input
               type="checkbox"
               className="pdf-checkbox"
-              checked={formData.businessType === 'limitedCompany'}
-              onChange={() =>
-                updateField('businessType',
-                  formData.businessType === 'limitedCompany' ? '' : 'limitedCompany')
-              }
+              checked={!!formData.businessType.limitedCompany}
+              onChange={(e) => updateNested('businessType', 'limitedCompany', e.target.checked)}
             />
           </label>
         </div>
@@ -87,9 +84,8 @@ export default function PDFPage1({ formData, updateField, updateNested, updateSe
               <label className="pdf-field-row flex-2">
                 <span className="pdf-label">Limited liability partnership</span>
                 <input type="checkbox" className="pdf-checkbox"
-                  checked={formData.businessType === 'limitedLiabilityPartnership'}
-                  onChange={() => updateField('businessType',
-                    formData.businessType === 'limitedLiabilityPartnership' ? '' : 'limitedLiabilityPartnership')}
+                  checked={!!formData.businessType.limitedLiabilityPartnership}
+                  onChange={(e) => updateNested('businessType', 'limitedLiabilityPartnership', e.target.checked)}
                 />
               </label>
             )},
@@ -97,9 +93,8 @@ export default function PDFPage1({ formData, updateField, updateNested, updateSe
               <label className="pdf-field-row flex-2">
                 <span className="pdf-label">Sole trader</span>
                 <input type="checkbox" className="pdf-checkbox"
-                  checked={formData.businessType === 'soleTrader'}
-                  onChange={() => updateField('businessType',
-                    formData.businessType === 'soleTrader' ? '' : 'soleTrader')}
+                  checked={!!formData.businessType.soleTrader}
+                  onChange={(e) => updateNested('businessType', 'soleTrader', e.target.checked)}
                 />
               </label>
             )},
@@ -117,9 +112,8 @@ export default function PDFPage1({ formData, updateField, updateNested, updateSe
                 <label className="pdf-field-row flex-2">
                   <span className="pdf-label">Partnership</span>
                   <input type="checkbox" className="pdf-checkbox"
-                    checked={formData.businessType === 'partnership'}
-                    onChange={() => updateField('businessType',
-                      formData.businessType === 'partnership' ? '' : 'partnership')}
+                    checked={!!formData.businessType.partnership}
+                    onChange={(e) => updateNested('businessType', 'partnership', e.target.checked)}
                   />
                 </label>
               ),

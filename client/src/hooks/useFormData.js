@@ -11,7 +11,12 @@ const initialState = {
   invoiceAddress2: '',
   invoiceAddress3: '',
   invoicePostcode: '',
-  businessType: '', // 'limitedCompany' | 'limitedLiabilityPartnership' | 'soleTrader' | 'partnership'
+  businessType: {
+    limitedCompany: false,
+    limitedLiabilityPartnership: false,
+    soleTrader: false,
+    partnership: false,
+  },
   invoiceContact: '',
   invoiceTel: '',
   invoiceEmail: '',
