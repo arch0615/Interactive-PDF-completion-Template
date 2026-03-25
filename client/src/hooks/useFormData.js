@@ -51,7 +51,11 @@ const initialState = {
   electronicInvoicing: false,
   electronicInvoicingEmail: '',
   initialServiceTermWeeks: '',
-  paymentMethod: '', // 'directDebit' | 'standardCredit' | 'inAdvance'
+  paymentMethod: {
+    directDebit: false,
+    standardCredit: false,
+    inAdvance: false,
+  },
   inAdvanceWeeks: '',
 
   // --- Special Conditions ---
@@ -88,7 +92,9 @@ const initialState = {
     greenwaste: false,
     weee: false,
   },
+  recoveredOther1Checked: false,
   recoveredOther1: '',
+  recoveredOther2Checked: false,
   recoveredOther2: '',
 
   // --- Health & Safety ---

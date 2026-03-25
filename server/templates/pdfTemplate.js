@@ -11,7 +11,7 @@ export function generateHtml(data) {
     specialConditions1: '', specialConditions2: '', specialConditions3: '',
     specialConditions4: '', specialConditions5: '',
     electronicInvoicing: false, electronicInvoicingEmail: '',
-    initialServiceTermWeeks: '', paymentMethod: '', inAdvanceWeeks: '',
+    initialServiceTermWeeks: '', paymentMethod: {}, inAdvanceWeeks: '',
     producer: '', wasteProcess: '', transferNoteFrom: '', transferNoteTo: '',
     wasteTypes: {}, segregateWaste: '', recoveredItems: {},
     recoveredOther1: '', recoveredOther2: '',
@@ -30,7 +30,7 @@ export function generateHtml(data) {
 
   const checked = (val) => val ? '&#10003;' : '';
   const bt = (type) => d.businessType?.[type] ? '&#10003;' : '';
-  const pm = (type) => d.paymentMethod === type ? '&#10003;' : '';
+  const pm = (type) => d.paymentMethod?.[type] ? '&#10003;' : '';
   const wt = (key) => d.wasteTypes?.[key] ? '&#10003;' : '';
   const ri = (key) => d.recoveredItems?.[key] ? '&#10003;' : '';
   const hs = (key, val) => d.healthSafety?.[key] === val ? '&#10003;' : '';
@@ -483,14 +483,14 @@ export function generateHtml(data) {
         <div class="rec-item"><span class="cb">${ri('glass')}</span> Glass</div>
         <div class="rec-item"><span class="cb">${ri('plastic')}</span> Plastic</div>
         <div class="rec-item"><span class="cb">${ri('metals')}</span> Metals</div>
-        <div class="rec-other"><span class="cb">${d.recoveredOther1 ? '&#10003;' : ''}</span> Other <span class="ov">${d.recoveredOther1}</span></div>
+        <div class="rec-other"><span class="cb">${checked(d.recoveredOther1Checked)}</span> Other <span class="ov">${d.recoveredOther1}</span></div>
       </div>
       <div class="rec-row">
         <div class="rec-item"><span class="cb">${ri('wood')}</span> Wood</div>
         <div class="rec-item"><span class="cb">${ri('food')}</span> Food</div>
         <div class="rec-item"><span class="cb">${ri('greenwaste')}</span> Greenwaste</div>
         <div class="rec-item"><span class="cb">${ri('weee')}</span> WEEE</div>
-        <div class="rec-other"><span class="cb">${d.recoveredOther2 ? '&#10003;' : ''}</span> Other <span class="ov">${d.recoveredOther2}</span></div>
+        <div class="rec-other"><span class="cb">${checked(d.recoveredOther2Checked)}</span> Other <span class="ov">${d.recoveredOther2}</span></div>
       </div>
       <div class="note">I confirm that I have fulfilled my duty to apply The Waste Hierarchy as required by regulation 12 of the England, Wales regulations 2011.</div>
     </div>

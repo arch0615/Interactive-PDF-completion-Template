@@ -91,26 +91,23 @@ export default function PDFPage2({ formData, updateField, updateNested }) {
               <div className="pdf-inv-payment">
                 <label className="pdf-checkbox-label">
                   <input type="checkbox" className="pdf-checkbox"
-                    checked={formData.paymentMethod === 'directDebit'}
-                    onChange={() => updateField('paymentMethod',
-                      formData.paymentMethod === 'directDebit' ? '' : 'directDebit')}
+                    checked={!!formData.paymentMethod.directDebit}
+                    onChange={(e) => updateNested('paymentMethod', 'directDebit', e.target.checked)}
                   />
                   <span>Direct Debit</span>
                 </label>
                 <label className="pdf-checkbox-label">
                   <input type="checkbox" className="pdf-checkbox"
-                    checked={formData.paymentMethod === 'standardCredit'}
-                    onChange={() => updateField('paymentMethod',
-                      formData.paymentMethod === 'standardCredit' ? '' : 'standardCredit')}
+                    checked={!!formData.paymentMethod.standardCredit}
+                    onChange={(e) => updateNested('paymentMethod', 'standardCredit', e.target.checked)}
                   />
                   <span>Standard credit</span>
                 </label>
                 <div className="pdf-inv-advance-row">
                   <label className="pdf-checkbox-label">
                     <input type="checkbox" className="pdf-checkbox"
-                      checked={formData.paymentMethod === 'inAdvance'}
-                      onChange={() => updateField('paymentMethod',
-                        formData.paymentMethod === 'inAdvance' ? '' : 'inAdvance')}
+                      checked={!!formData.paymentMethod.inAdvance}
+                      onChange={(e) => updateNested('paymentMethod', 'inAdvance', e.target.checked)}
                     />
                     <span>In advance</span>
                   </label>
@@ -258,8 +255,8 @@ export default function PDFPage2({ formData, updateField, updateNested }) {
           ))}
           <label className="pdf-other-field">
             <input type="checkbox" className="pdf-checkbox"
-              checked={!!formData.recoveredOther1}
-              readOnly
+              checked={!!formData.recoveredOther1Checked}
+              onChange={(e) => updateField('recoveredOther1Checked', e.target.checked)}
             />
             <span>Other</span>
             <input type="text"
@@ -281,8 +278,8 @@ export default function PDFPage2({ formData, updateField, updateNested }) {
           ))}
           <label className="pdf-other-field">
             <input type="checkbox" className="pdf-checkbox"
-              checked={!!formData.recoveredOther2}
-              readOnly
+              checked={!!formData.recoveredOther2Checked}
+              onChange={(e) => updateField('recoveredOther2Checked', e.target.checked)}
             />
             <span>Other</span>
             <input type="text"
